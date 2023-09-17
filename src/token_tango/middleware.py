@@ -1,11 +1,11 @@
 import base64
+import json
 from threading import Thread
 from typing import Any
 
 from fastapi import FastAPI
 from fastapi import HTTPException
 from fastapi import Request
-from jwcrypto.common import json
 from jwt.jwk import jwk_from_public_bytes
 from jwt.jwt import JWT
 
