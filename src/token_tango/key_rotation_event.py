@@ -19,10 +19,10 @@ class KeyRotationEvent:
 
     @classmethod
     def from_json(cls, json_str: str) -> KeyRotationEvent:
-        data = json.loads(json_str)
+        json_payload = json.loads(json_str)
         return cls(
-            key_id=data["key_id"],
-            public_key=data["public_key"],
-            generation_date=datetime.fromisoformat(data["generation_date"]),
-            expiration_date=datetime.fromisoformat(data["expiration_date"]),
+            key_id=json_payload["key_id"],
+            public_key=json_payload["public_key"],
+            generation_date=datetime.fromisoformat(json_payload["generation_date"]),
+            expiration_date=datetime.fromisoformat(json_payload["expiration_date"]),
         )

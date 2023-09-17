@@ -22,6 +22,10 @@ class KeyRotationConsumer:
         except KeyboardInterrupt:
             logging.info("Consumer was interrupted by user")
 
+    def close(self) -> None:
+        self._should_consume = False
+        self.consumer.close()
+
     def _consume_messages(self) -> Iterable[KeyRotationEvent]:
         for message in self.consumer.consume(timeout=10):
             logging.debug("Received new Key Rotation Event")
@@ -30,7 +34,3 @@ class KeyRotationConsumer:
                 logging.error(error)
                 continue
             yield KeyRotationEvent.from_json(message.value().decode())
-
-    def close(self) -> None:
-        self._should_consume = False
-        self.consumer.close()
